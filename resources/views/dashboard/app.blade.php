@@ -17,6 +17,10 @@
   <link rel="stylesheet" href="{{asset('public/back-end')}}/plugins/icheck-bootstrap/icheck-bootstrap.min.css">
   <!-- JQVMap -->
   <link rel="stylesheet" href="{{asset('public/back-end')}}/plugins/jqvmap/jqvmap.min.css">
+    <!-- DataTables -->
+    <link rel="stylesheet" href="{{asset('public/back-end')}}/plugins/datatables-bs4/css/dataTables.bootstrap4.min.css">
+    <link rel="stylesheet" href="{{asset('public/back-end')}}/plugins/datatables-responsive/css/responsive.bootstrap4.min.css">
+    <link rel="stylesheet" href="{{asset('public/back-end')}}/plugins/datatables-buttons/css/buttons.bootstrap4.min.css">
   <!-- Theme style -->
   <link rel="stylesheet" href="{{asset('public/back-end')}}/dist/css/adminlte.min.css">
   <!-- overlayScrollbars -->
@@ -41,7 +45,7 @@
   <!-- Main Sidebar Container -->
   @include('dashboard.partials.side-nav')
   <!-- /.Main Sidebar Container -->
-  
+
 
   <!-- Content Wrapper. Contains page content -->
   @yield('content')
@@ -72,15 +76,15 @@
 </script>
 <!-- Bootstrap 4 -->
 <script src="{{asset('public/back-end')}}/plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
-<!-- ChartJS -->
-<script src="{{asset('public/back-end')}}/plugins/chart.js/Chart.min.js"></script>
-<!-- Sparkline -->
-<script src="{{asset('public/back-end')}}/plugins/sparklines/sparkline.js"></script>
-<!-- JQVMap -->
-<script src="{{asset('public/back-end')}}/plugins/jqvmap/jquery.vmap.min.js"></script>
-<script src="{{asset('public/back-end')}}/plugins/jqvmap/maps/jquery.vmap.usa.js"></script>
-<!-- jQuery Knob Chart -->
-<script src="{{asset('public/back-end')}}/plugins/jquery-knob/jquery.knob.min.js"></script>
+{{--<!-- ChartJS -->--}}
+{{--<script src="{{asset('public/back-end')}}/plugins/chart.js/Chart.min.js"></script>--}}
+{{--<!-- Sparkline -->--}}
+{{--<script src="{{asset('public/back-end')}}/plugins/sparklines/sparkline.js"></script>--}}
+{{--<!-- JQVMap -->--}}
+{{--<script src="{{asset('public/back-end')}}/plugins/jqvmap/jquery.vmap.min.js"></script>--}}
+{{--<script src="{{asset('public/back-end')}}/plugins/jqvmap/maps/jquery.vmap.usa.js"></script>--}}
+{{--<!-- jQuery Knob Chart -->--}}
+{{--<script src="{{asset('public/back-end')}}/plugins/jquery-knob/jquery.knob.min.js"></script>--}}
 <!-- daterangepicker -->
 <script src="{{asset('public/back-end')}}/plugins/moment/moment.min.js"></script>
 <script src="{{asset('public/back-end')}}/plugins/daterangepicker/daterangepicker.js"></script>
@@ -90,11 +94,32 @@
 <script src="{{asset('public/back-end')}}/plugins/summernote/summernote-bs4.min.js"></script>
 <!-- overlayScrollbars -->
 <script src="{{asset('public/back-end')}}/plugins/overlayScrollbars/js/jquery.overlayScrollbars.min.js"></script>
+<!-- DataTables  & Plugins -->
+<script src="{{asset('public/back-end')}}/plugins/datatables/jquery.dataTables.min.js"></script>
+<script src="{{asset('public/back-end')}}/plugins/datatables-bs4/js/dataTables.bootstrap4.min.js"></script>
+<script src="{{asset('public/back-end')}}/plugins/datatables-responsive/js/dataTables.responsive.min.js"></script>
+<script src="{{asset('public/back-end')}}/plugins/datatables-responsive/js/responsive.bootstrap4.min.js"></script>
+<script src="{{asset('public/back-end')}}/plugins/datatables-buttons/js/dataTables.buttons.min.js"></script>
+<script src="{{asset('public/back-end')}}/plugins/datatables-buttons/js/buttons.bootstrap4.min.js"></script>
+<script src="{{asset('public/back-end')}}/plugins/jszip/jszip.min.js"></script>
+<script src="{{asset('public/back-end')}}/plugins/pdfmake/pdfmake.min.js"></script>
+<script src="{{asset('public/back-end')}}/plugins/pdfmake/vfs_fonts.js"></script>
+<script src="{{asset('public/back-end')}}/plugins/datatables-buttons/js/buttons.html5.min.js"></script>
+<script src="{{asset('public/back-end')}}/plugins/datatables-buttons/js/buttons.print.min.js"></script>
+<script src="{{asset('public/back-end')}}/plugins/datatables-buttons/js/buttons.colVis.min.js"></script>
 <!-- AdminLTE App -->
 <script src="{{asset('public/back-end')}}/dist/js/adminlte.js"></script>
 <!-- AdminLTE for demo purposes -->
-<script src="{{asset('public/back-end')}}/dist/js/demo.js"></script>
+{{--<script src="{{asset('public/back-end')}}/dist/js/demo.js"></script>--}}
 <!-- AdminLTE dashboard demo (This is only for demo purposes) -->
 <script src="{{asset('public/back-end')}}/dist/js/pages/dashboard.js"></script>
+<script>
+    $(function () {
+        $("#example1").DataTable({
+            "responsive": true, "lengthChange": false, "autoWidth": false,
+            "buttons": ["copy", "csv", "excel", "pdf", "print", "colvis"]
+        }).buttons().container().appendTo('#example1_wrapper .col-md-6:eq(0)');
+    });
+</script>
 </body>
 </html>

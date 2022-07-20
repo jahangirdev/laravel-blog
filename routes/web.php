@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\CategoryController;
 
 /*
 |--------------------------------------------------------------------------
@@ -29,4 +30,5 @@ Route::middleware('auth')->group(function(){
 
     //route for welcome screen of dashboard
     Route::view('/dashboard', 'dashboard.welcome')->name('dashboard.welcome');
+    Route::resource('/dashboard/categories', CategoryController::class);
 });
