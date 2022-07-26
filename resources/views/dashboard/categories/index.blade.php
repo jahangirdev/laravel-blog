@@ -6,7 +6,7 @@
             <div class="container-fluid">
                 <div class="row mb-2">
                     <div class="col-sm-6">
-                        <h1>All Category</h1>
+                        <h1>{{__('All Category')}}</h1>
                     </div>
                     <div class="col-sm-6">
                         <ol class="breadcrumb float-sm-right">
@@ -49,7 +49,7 @@
                                             <form class="d-inline" action="{{ route('categories.destroy', $category->id) }}" method="post">
                                                 @csrf
                                                 <input type="hidden" name="_method" value="delete">
-                                                <button type="submit" class="btn btn-danger">Delete</button>
+                                                <button type="submit" class="btn btn-danger" onclick="return confirm('Are you sure to delete this category?')">Delete</button>
                                             </form>
                                         </td>
                                     </tr>
@@ -71,3 +71,19 @@
     </div>
     <!-- /.content-wrapper -->
 @endsection
+@push('scripts')
+    <script>
+        $(function () {
+            $("#example1").DataTable({
+                "responsive": true, "lengthChange": false, "autoWidth": false,
+                "buttons": ["copy", "csv", "excel", "pdf", "print", "colvis"]
+            }).buttons().container().appendTo('#example1_wrapper .col-md-6:eq(0)');
+        });
+        document.addEventListener('DOMContentLoaded', ()=>{
+            //toastr message
+            @if(Session::get('alert'))
+            toastr.{{Session::get('alert')['type']}}('{{Session::get('alert')['message']}}' @if(Session::get('alert')['title']), '{{Session::get('alert')['title']}}'@endif );
+            @endif
+        });
+    </script>
+@endpush

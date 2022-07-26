@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Category;
 use Illuminate\Http\Request;
+use Illuminate\Support\Str;
 
 class CategoryController extends Controller
 {
@@ -25,7 +26,7 @@ class CategoryController extends Controller
      */
     public function create()
     {
-        //
+        return view('dashboard.categories.create');
     }
 
     /**
@@ -36,7 +37,16 @@ class CategoryController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->category_slug = Str::of($request->category_slug ? $request->category_slug : $request->category_name)->slug('-');
+        $request->validate([
+            'category_name' => 'required|unique:categories',
+            'category_slug' => 'unique:categories'
+        ]);
+        Category::insert([
+            'category_name' => $request->category_name,
+            'category_slug' => 'unique'
+        ]);
+        return redirect()->back()->with('alert', ['type'=>'success', 'message' => 'Category inserted successfully.', 'title' => 'Great job!']);
     }
 
     /**
@@ -58,7 +68,7 @@ class CategoryController extends Controller
      */
     public function edit(Category $category)
     {
-        //
+        return view('dashboard.categories.edit', ['category' => $category]);
     }
 
     /**
@@ -70,7 +80,15 @@ class CategoryController extends Controller
      */
     public function update(Request $request, Category $category)
     {
-        //
+        $request->category_slug = Str::of($request->category_slug ? $request->category_slug : $request->category_name)->slug('-');
+        $request->validate([
+            'category_name' => 'required|unique:categories,category_name,'.$category->id,
+            'category_slug' => 'unique:categories,category_slug,'.$category->id
+        ]);
+        $category->category_name = $request->category_name;
+        $category->category_slug = $request->category_slug;
+        $category->save();
+        return redirect()->route('categories.index')->with('alert', ['type'=>'success', 'message' => 'Category updated successfully.', 'title' => 'Updated!']);
     }
 
     /**
@@ -81,6 +99,7 @@ class CategoryController extends Controller
      */
     public function destroy(Category $category)
     {
-        //
+        $category->delete();
+        return redirect()->back()->with('alert', ['type'=>'warning', 'message' => 'Category '."'".$category->category_name."'".' has been deleted.', 'title' => 'Deleted!']);
     }
 }

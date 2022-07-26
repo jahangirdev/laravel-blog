@@ -604,3 +604,21 @@
     <!-- /.content -->
   </div>
 @endsection
+@push('scripts')
+    <!-- ChartJS -->
+    <script src="{{asset('public/back-end')}}/plugins/chart.js/Chart.min.js"></script>
+    <!-- Sparkline -->
+    <script src="{{asset('public/back-end')}}/plugins/sparklines/sparkline.js"></script>
+    <!-- JQVMap -->
+    <script src="{{asset('public/back-end')}}/plugins/jqvmap/jquery.vmap.min.js"></script>
+    <script src="{{asset('public/back-end')}}/plugins/jqvmap/maps/jquery.vmap.usa.js"></script>
+    <!-- jQuery Knob Chart -->
+    <script src="{{asset('public/back-end')}}/plugins/jquery-knob/jquery.knob.min.js"></script>
+    <!-- daterangepicker -->
+    <script src="{{asset('public/back-end')}}/plugins/moment/moment.min.js"></script>
+    <script src="{{asset('public/back-end')}}/plugins/daterangepicker/daterangepicker.js"></script>
+    <!-- Tempusdominus Bootstrap 4 -->
+    <script src="{{asset('public/back-end')}}/plugins/tempusdominus-bootstrap-4/js/tempusdominus-bootstrap-4.min.js"></script>
+    <!-- Summernote -->
+    <script src="{{asset('public/back-end')}}/plugins/summernote/summernote-bs4.min.js"></script>
+@endpush
