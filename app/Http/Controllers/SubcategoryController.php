@@ -2,8 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Category;
 use App\Models\Subcategory;
 use Illuminate\Http\Request;
+use Illuminate\Support\Str;
 
 class SubcategoryController extends Controller
 {
@@ -14,7 +16,8 @@ class SubcategoryController extends Controller
      */
     public function index()
     {
-        //
+        $subcategories = Subcategory::all();
+        return view('dashboard.subcategories.index', compact('subcategories'));
     }
 
     /**
@@ -24,7 +27,8 @@ class SubcategoryController extends Controller
      */
     public function create()
     {
-        //
+        $categories = Category::all();
+        return view('dashboard.subcategories.create', compact('categories'));
     }
 
     /**
@@ -35,7 +39,18 @@ class SubcategoryController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->category_slug = Str::of($request->category_slug ? $request->category_slug : $request->category_name)->slug('-');
+        $request->validate([
+            'subcategory_name' => 'required|unique:subcategories',
+            'subcategory_slug' => 'unique:subcategories',
+            'category_id' => 'required'
+        ]);
+        $subcategory = new Subcategory();
+        $subcategory->subcategory_name = $request->subcategory_name;
+        $subcategory->subcategory_slug = $request->subcategory_slug;
+        $subcategory->category_id = $request->category_id;
+        $subcategory->save();
+        return redirect()->back()->with('alert', ['message' => 'Subcategory created successfully.', 'title' => 'Created!', 'type' => 'success']);
     }
 
     /**
@@ -57,7 +72,8 @@ class SubcategoryController extends Controller
      */
     public function edit(Subcategory $subcategory)
     {
-        //
+        $categories = Category::all();
+        return view('dashboard.subcategories.edit', compact('subcategory', 'categories'));
     }
 
     /**
@@ -69,7 +85,17 @@ class SubcategoryController extends Controller
      */
     public function update(Request $request, Subcategory $subcategory)
     {
-        //
+        $request->category_slug = Str::of($request->category_slug ? $request->category_slug : $request->category_name)->slug('-');
+        $request->validate([
+            'subcategory_name' => 'required|unique:subcategories,subcategory_name,'.$subcategory->id,
+            'subcategory_slug' => 'unique:subcategories,subcategory_slug,'.$subcategory->id,
+            'category_id' => 'required'
+        ]);
+        $subcategory->subcategory_name = $request->subcategory_name;
+        $subcategory->subcategory_slug = $request->subcategory_slug;
+        $subcategory->category_id = $request->category_id;
+        $subcategory->save();
+        return redirect()->route('subcategories.index')->with('alert', ['message' => 'Subcategory updated successfully.', 'title' => 'Updated!', 'type' => 'success']);
     }
 
     /**
@@ -80,6 +106,7 @@ class SubcategoryController extends Controller
      */
     public function destroy(Subcategory $subcategory)
     {
-        //
+        $subcategory->delete();
+        return redirect()->back()->with('alert', ['type'=>'warning', 'message' => 'Subcategory '."'".$subcategory->subcategory_name."'".' has been deleted.', 'title' => 'Deleted!']);
     }
 }
