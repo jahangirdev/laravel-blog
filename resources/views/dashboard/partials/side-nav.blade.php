@@ -61,7 +61,7 @@
               <li class="nav-item">
                 <a href="{{route('categories.index')}}" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
-                  <p>All categories</p>
+                  <p>Manage categories</p>
                 </a>
               </li>
             </ul>
@@ -84,11 +84,34 @@
               <li class="nav-item">
                 <a href="{{route('subcategories.index')}}" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
-                  <p>All Subcategories</p>
+                  <p>Manage Subcategories</p>
                 </a>
               </li>
             </ul>
           </li>
+            <li class="nav-item">
+                <a href="{{route('posts.index')}}" class="nav-link">
+                    <i class="nav-icon fas fa-copy"></i>
+                    <p>
+                        Posts
+                        <i class="fas fa-angle-left right"></i>
+                    </p>
+                </a>
+                <ul class="nav nav-treeview">
+                    <li class="nav-item">
+                        <a href="{{route('posts.create')}}" class="nav-link">
+                            <i class="far fa-circle nav-icon"></i>
+                            <p>Add New</p>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="{{route('posts.index')}}" class="nav-link">
+                            <i class="far fa-circle nav-icon"></i>
+                            <p>Manage Posts</p>
+                        </a>
+                    </li>
+                </ul>
+            </li>
         </ul>
       </nav>
       <!-- /.sidebar-menu -->

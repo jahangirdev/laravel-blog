@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\SubcategoryController;
+use App\Http\Controllers\PostController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -32,4 +33,6 @@ Route::middleware('auth')->group(function(){
     Route::view('/dashboard', 'dashboard.welcome')->name('dashboard.welcome');
     Route::resource('/dashboard/categories', CategoryController::class);
     Route::resource('/dashboard/subcategories', SubcategoryController::class);
+    Route::get('/dashboard/get-subcategories/{id}', [SubcategoryController::class, 'getSubcategories']);
+    Route::resource('/dashboard/posts', PostController::class);
 });

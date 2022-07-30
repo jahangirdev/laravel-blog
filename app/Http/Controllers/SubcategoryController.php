@@ -109,4 +109,14 @@ class SubcategoryController extends Controller
         $subcategory->delete();
         return redirect()->back()->with('alert', ['type'=>'warning', 'message' => 'Subcategory '."'".$subcategory->subcategory_name."'".' has been deleted.', 'title' => 'Deleted!']);
     }
+    /**
+     * Get subcategories by category id
+     *
+     * @param \App\Models\Subcategory $id
+     * @return \Illuminate\Http\Response as json
+     */
+    public function getSubcategories($id){
+        $subcategories = Subcategory::where('category_id', $id)->get();
+        return response()->json($subcategories);
+    }
 }
